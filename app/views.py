@@ -39,8 +39,6 @@ def photo_list_json():
         timeFormat = photo.split('.')[0]
         time = datetime.strptime(timeFormat,"%Y-%m-%d-%H-%M-%S")
         phone_name.append("%s年%s月%s日%s时%s分%s秒 星期%s"%(time.year,time.month,time.day,time.hour,time.minute,time.second,time.isoweekday()))
-    photo_list=photo_list+photo_list
-    phone_name=phone_name+phone_name
     return jsonify({"name":phone_name,"photo":photo_list})
 
     

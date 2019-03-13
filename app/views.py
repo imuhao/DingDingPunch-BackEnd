@@ -39,8 +39,6 @@ def photo_list_json():
         timeFormat = photo.split('.')[0]
         time = datetime.strptime(timeFormat,"%Y-%m-%d-%H-%M-%S")
         phone_name.append("%s年%s月%s日%s时%s分%s秒 星期%s"%(time.year,time.month,time.day,time.hour,time.minute,time.second,time.isoweekday()))
-
-    # res = {"photos":photo_list,"names":phone_name}
     result = []
     for i in range(len(phone_name)):
         result.append({"name":phone_name[i],"photo":photo_list[i]})

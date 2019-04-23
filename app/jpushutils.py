@@ -1,10 +1,8 @@
-
-from app import config
 import jpush
-_jpush = jpush.JPush(config.app_key, config.master_secret)
-_jpush.set_logging("DEBUG")
+from app import config
 
-
+_jpush = jpush.JPush(config.app_key,config.master_secret)
+# _jpush.set_logging("DEBUG")
 
 def all():
     push = _jpush.create_push()

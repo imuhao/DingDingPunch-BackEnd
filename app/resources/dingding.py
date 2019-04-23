@@ -13,7 +13,7 @@ parser.add_argument('status',type=int,required=False)
 class DingDingPunchList(Resource):
     def post(self):
         args = parser.parse_args()
-        if "photo" in args.keys():
+        if not  args['photo'] is None:
             filename = photos.save(args['photo'])
             # file_url = photos.url(filename)
         else:

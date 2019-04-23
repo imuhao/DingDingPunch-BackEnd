@@ -37,6 +37,7 @@ class DingDingPunchList(Resource):
             punch["_id"] = str(punch["_id"])
             if(punch["photo"] ):
                 punch["photo"] = photos.url(punch['photo'])
+            punch["time"] = timeutils.pretty_date(int(punch["time"]))
             result.append(punch)
         return {"result":result}
 

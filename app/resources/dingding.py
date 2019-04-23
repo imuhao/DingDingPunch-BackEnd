@@ -13,8 +13,13 @@ parser.add_argument('status',type=int,required=True)
 class DingDingPunchList(Resource):
     def post(self):
         args = parser.parse_args()
-        filename = photos.save(args['photo'])
-        file_url = photos.url(filename)
+        if "photo" in args.keys():
+            filename = photos.save(args['photo'])
+            # file_url = photos.url(filename)
+        else:
+            filename = ""
+            
+        
         punch = {
             "photo":filename,
             "action":args['action'],
@@ -29,7 +34,8 @@ class DingDingPunchList(Resource):
         result = []
         for punch in punchs:
             punch["_id"] = str(punch["_id"])
-            punch["photo"] = photos.url(punch['photo'])
+            if(punch["photo"] ):
+                punch["photo"] = photos.url(punch['photo'])
             result.append(punch)
         return {"result":result}
 

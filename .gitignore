@@ -7,3 +7,6 @@ dist
 build
 .idea/
 .idea/workspace.xml
+app/static/images/*
+log/
+supervisor.conf

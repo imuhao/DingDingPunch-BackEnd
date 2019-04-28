@@ -4,6 +4,7 @@ from app import photos,db
 from app.utils import timeutils
 import json
 from bson.objectid import ObjectId
+import pymongo
 
 parser = reqparse.RequestParser()
 parser.add_argument('photo', type=FileStorage, required=False,location='files')
@@ -30,8 +31,7 @@ class DingDingPunchList(Resource):
     def get(self):
         args = parser.parse_args()
         argsNotNone = {k: v for k, v in args.items() if v is not None}
-
-        punchs = db.punchs.find(argsNotNone)
+        punchs = db.punchs.find(argsNotNone).sort("time",pymongo.DESCENDING)
         result = []
         for punch in punchs:
             punch["_id"] = str(punch["_id"])
@@ -40,7 +40,6 @@ class DingDingPunchList(Resource):
             punch["time"] = timeutils.pretty_date(int(punch["time"]))
             result.append(punch)
         return {"result":result}
-
 
 class DingDingPunch(Resource):
     def delete(self,_id):
